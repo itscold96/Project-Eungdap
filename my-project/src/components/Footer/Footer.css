@@ -1,0 +1,17 @@
+.init__footer {
+  border-top: 1px solid gray;
+  height: 30vh;
+  display: flex;
+  background-color: black;
+}
+
+.footer_text {
+  color: gray;
+  font-size: small;
+  font-weight: 600;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}

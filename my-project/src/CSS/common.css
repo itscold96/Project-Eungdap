@@ -1,8 +1,30 @@
-main {
-  min-height: 80vh;
+* {
+  font-family: 'NanumGothic';
 }
 
-footer,
-header {
-  min-height: 10vh;
+main {
+  min-height: 100vh;
+  padding-top: 45px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-basic {
+  height: 30px;
+  padding: 0px 10px;
+  border-radius: 15px;
+  background-color: #7d6bf2;
+  color: white;
+}
+
+.eungdap-title {
+  color: #7d6bf2;
+  font-weight: 600;
 }

@@ -1,0 +1,83 @@
+.init {
+  display: flex;
+  flex-direction: column;
+}
+
+.init__intro {
+  height: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.intro__text,
+.start__text {
+  text-align: center;
+  padding-top: 180px;
+  font-weight: 600;
+  font-size: 2.5rem;
+  padding-bottom: 50px;
+}
+
+.init__start {
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start__text p:nth-child(1) {
+  color: white;
+}
+
+.init__start button {
+  margin-top: 50px;
+}
+
+.intro__text p {
+  margin-bottom: 30px;
+}
+
+.init__intro {
+  animation: focus-in-contract-bck 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes focus-in-contract-bck {
+  0% {
+    letter-spacing: 1em;
+    transform: translateZ(300px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(12px);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.init__yet,
+.init__f1,
+.init__f2 {
+  padding: 100px 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 2rem;
+  gap: 70px;
+}
+
+.init__f1 {
+  text-align: right;
+}
+
+.yet__text p,
+.f1__text p,
+.f2__text p,
+.start__text p {
+  margin-bottom: 20px;
+}

@@ -1,4 +1,4 @@
-.header {
+.IntroHeader {
   position: fixed;
   box-sizing: border-box;
   height: 45px;
@@ -10,12 +10,12 @@
   background-color: white;
 }
 
-.header__hdr-right {
+.IntroHeader__hdr-right {
   font-size: 1.6rem;
   font-weight: 900;
 }
 
-.header__hdr-left {
+.IntroHeader__hdr-left {
   display: flex;
   gap: 15px;
 }
