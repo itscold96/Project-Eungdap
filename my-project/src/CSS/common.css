@@ -1,10 +1,13 @@
+@import 'fonts/pretendard';
+
 * {
-  font-family: 'NanumGothic';
+  font-family: 'Pretendard';
 }
 
 main {
   min-height: 100vh;
-  padding-top: 50px;
+  padding: 55px 200px 0px 185px;
+  background-color: #f6f6f6;
 }
 
 button {
@@ -17,14 +20,15 @@ a {
 }
 
 .btn-basic {
-  height: 35px;
-  padding: 0px 10px;
-  border-radius: 15px;
-  background-color: #7d6bf2;
-  color: white;
+  height: 2.5rem;
+  padding: 0px 1.5rem;
+  background-color: #b38941;
+  color: #f6f6f6;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .eungdap-title {
-  color: #7d6bf2;
-  font-weight: 600;
+  color: #b38941;
+  font-weight: 900;
 }

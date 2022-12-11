@@ -15,7 +15,7 @@ function Header() {
         <header className='IntroHeader'>
           <div className='IntroHeader__hdr-right'>
             <a href='/Main' className='eungdap-title'>
-              응%답
+              EungDap.
             </a>
           </div>
           <button className='btn-basic' onClick={onClickMoveMain}>
@@ -26,9 +26,20 @@ function Header() {
         <header className='header'>
           <div className='header__hdr-right'>
             <a href='/Main' className='eungdap-title'>
-              응%답
+              EungDap.
             </a>
           </div>
+          <ul className='header__hdr-feats'>
+            <li>
+              <button className='btn-feat'>설문 만들기</button>
+            </li>
+            <li>
+              <button className='btn-feat'>진행중인 설문 보기</button>
+            </li>
+            <li>
+              <button className='btn-feat'>완료된 설문 보기</button>
+            </li>
+          </ul>
           <ul className='header__hdr-left'>
             <li>
               <button className='btn-basic'>로그인</button>

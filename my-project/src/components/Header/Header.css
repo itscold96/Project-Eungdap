@@ -2,23 +2,38 @@
 .header {
   position: fixed;
   box-sizing: border-box;
-  height: 50px;
+  height: 55px;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 70px 0px 35px;
-  background-color: white;
+  padding: 0px 200px 0px 185px;
+  background-color: #f6f6f6;
+  z-index: 2;
 }
 
 .IntroHeader__hdr-right,
 .header__hdr-right {
-  font-size: 1.6rem;
-  font-weight: 900;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
 }
 
 .IntroHeader__hdr-left,
 .header__hdr-left {
   display: flex;
   gap: 15px;
+}
+
+.header__hdr-feats {
+  padding-top: 5px;
+  display: flex;
+  gap: 40px;
+}
+
+.btn-feat {
+  background-color: #f6f6f6;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
 }
