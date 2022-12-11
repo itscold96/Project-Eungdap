@@ -4,7 +4,7 @@
 
 main {
   min-height: 100vh;
-  padding-top: 45px;
+  padding-top: 50px;
 }
 
 button {
@@ -17,7 +17,7 @@ a {
 }
 
 .btn-basic {
-  height: 30px;
+  height: 35px;
   padding: 0px 10px;
   border-radius: 15px;
   background-color: #7d6bf2;

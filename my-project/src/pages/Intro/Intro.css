@@ -1,9 +1,9 @@
-.init {
+.intro {
   display: flex;
   flex-direction: column;
 }
 
-.init__intro {
+.intro__intro-main {
   height: 40vw;
   display: flex;
   flex-direction: column;
@@ -11,8 +11,7 @@
   z-index: 1;
 }
 
-.intro__text,
-.start__text {
+.intro-main__text {
   text-align: center;
   padding-top: 180px;
   font-weight: 600;
@@ -20,28 +19,30 @@
   padding-bottom: 50px;
 }
 
-.init__start {
+.intro__start {
   background-color: black;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-weight: 600;
+  font-size: 2.5rem;
+  height: 130vh;
 }
 
-.start__text p:nth-child(1) {
+.intro__start p:nth-child(1) {
   color: white;
 }
 
-.init__start button {
-  margin-top: 50px;
+.intro__start button {
+  margin-top: 20px;
 }
 
-.intro__text p {
+.intro-main__text p {
   margin-bottom: 30px;
 }
 
-.init__intro {
+.intro__intro-main {
   animation: focus-in-contract-bck 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -59,9 +60,9 @@
   }
 }
 
-.init__yet,
-.init__f1,
-.init__f2 {
+.intro__yet,
+.intro__f1,
+.intro__f2 {
   padding: 100px 70px;
   display: flex;
   justify-content: center;
@@ -71,13 +72,13 @@
   gap: 70px;
 }
 
-.init__f1 {
+.intro__f1 {
   text-align: right;
 }
 
 .yet__text p,
 .f1__text p,
 .f2__text p,
-.start__text p {
+.intro__start p {
   margin-bottom: 20px;
 }
