@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import Filter from 'components/Filter/Filter';
 import './Main.css';
 
 function Main() {
-  useEffect(() => {});
   return (
     <>
       <div className='main-upper'>
@@ -15,7 +14,7 @@ function Main() {
         </div>
       </div>
       <main className='main-page'>
-        <div className='main-filter'></div>
+        <Filter />
         <div className='main-page__surveys'>
           <ul className='survey'>
             <li>

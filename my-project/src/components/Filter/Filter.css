@@ -1,0 +1,45 @@
+.filter {
+  height: 200px;
+  width: 900px;
+  margin-bottom: 40px;
+}
+
+.filter__block {
+  display: flex;
+  height: 50px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filter__block__title {
+  background-color: #e0dddd;
+  height: 50px;
+  line-height: 50px;
+  width: 150px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  font-weight: 600;
+  font-size: large;
+}
+
+.filter__btn {
+  height: 50px;
+  font-size: large;
+  background-color: #f6f6f6;
+  margin: 0px 20px;
+}
+
+.filter__elements {
+  display: flex;
+  gap: 10px;
+}
+
+.elements__btn {
+  background-color: #b38941;
+  color: white;
+  height: 35px;
+  border-radius: 15px;
+  padding: 0px 10px;
+  margin-top: 10px;
+  font-weight: 600;
+}
