@@ -4,8 +4,12 @@ import './Header.css';
 function Header() {
   const navigate = useNavigate();
 
-  const onClickMoveMain = (e) => {
+  const onClickMoveToMain = (e) => {
     navigate('/Main');
+  };
+
+  const onClickMoveToMakingSurvey = (e) => {
+    navigate('/MakingSurvey');
   };
 
   return (
@@ -18,7 +22,7 @@ function Header() {
               EungDap.
             </a>
           </div>
-          <button className='btn-basic' onClick={onClickMoveMain}>
+          <button className='btn-basic' onClick={onClickMoveToMain}>
             시작하기
           </button>
         </header>
@@ -31,7 +35,9 @@ function Header() {
           </div>
           <ul className='header__hdr-feats'>
             <li>
-              <button className='btn-feat'>설문 만들기</button>
+              <button className='btn-feat' onClick={onClickMoveToMakingSurvey}>
+                설문 만들기
+              </button>
             </li>
             <li>
               <button className='btn-feat'>진행중인 설문 보기</button>

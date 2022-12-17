@@ -5,6 +5,7 @@ import Main from 'pages/Main/Main';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Intro from 'pages/Intro/Intro';
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
+import MakingSurvey from 'pages/MakingSurvey/MakingSurvey';
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
       <Routes>
         <Route path='/' element={<Intro />} />
         <Route path='/Main' element={<Main />} />
+        <Route path='/MakingSurvey' element={<MakingSurvey />} />
       </Routes>
       <Footer />
     </BrowserRouter>

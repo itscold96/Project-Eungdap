@@ -32,3 +32,7 @@ a {
   color: #b38941;
   font-weight: 900;
 }
+
+textarea {
+  word-break: keep-all;
+}

@@ -1,0 +1,56 @@
+.making-survey {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.making-survey__border {
+  box-shadow: 1px 2px 5px 1px rgb(170, 170, 170);
+}
+
+.making-survey__title-box {
+  width: 770px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.making-survey__boxColor {
+  background-color: #b38941;
+  height: 12px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.making-survey__title-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 20px;
+}
+
+.making-survey__title {
+  font-weight: 600;
+  font-size: 2.1rem;
+}
+
+.making-survey__title,
+.making-survey__title-explanation {
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid #efefef;
+}
+
+.making-survey__title-explanation,
+.making-survey__title-explanation::placeholder {
+  resize: none;
+  font-size: 1.1rem;
+}
+
+.making-survey__title-explanation:focus,
+.making-survey__title:focus {
+  outline: none;
+  border-bottom: 1px solid #b38941;
+}
