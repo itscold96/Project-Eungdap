@@ -19,13 +19,27 @@ a {
   text-decoration: none;
 }
 
+.btn-add,
+.btn-del,
 .btn-basic {
   height: 2.5rem;
-  padding: 0px 1.5rem;
-  background-color: #b38941;
+  padding: 0px 1rem;
   color: #f6f6f6;
   font-size: 1.1rem;
   font-weight: 700;
+  border-radius: 20px;
+}
+
+.btn-basic {
+  background-color: #b38941;
+}
+
+.btn-add {
+  background-color: #1f4072;
+}
+
+.btn-del {
+  background-color: #73020c;
 }
 
 .eungdap-title {

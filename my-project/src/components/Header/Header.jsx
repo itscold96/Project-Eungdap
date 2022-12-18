@@ -19,7 +19,7 @@ function Header() {
         <header className='IntroHeader'>
           <div className='IntroHeader__hdr-right'>
             <a href='/Main' className='eungdap-title'>
-              EungDap.
+              응답.
             </a>
           </div>
           <button className='btn-basic' onClick={onClickMoveToMain}>
@@ -30,7 +30,7 @@ function Header() {
         <header className='header'>
           <div className='header__hdr-right'>
             <a href='/Main' className='eungdap-title'>
-              EungDap.
+              응답.
             </a>
           </div>
           <ul className='header__hdr-feats'>
