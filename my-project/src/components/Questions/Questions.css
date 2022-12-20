@@ -80,7 +80,8 @@
 .options-box li > span {
   margin: 0px 10px 0px 10px;
   font-weight: 400;
-  flex-grow: 0.1;
+  width: 25px;
+  text-align: center;
 }
 
 .options-box li > button {
@@ -88,7 +89,7 @@
   font-weight: 700;
   right: 20px;
   padding-bottom: 5px;
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .options-box__option-text {

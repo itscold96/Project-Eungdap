@@ -4,20 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import './MakingSurvey.css';
 
 function MakingSurvey() {
+  const [surveyTitle, setSurveyTitle] = useState('');
+  const [surveyExplanation, setSurveyExplanation] = useState('');
   const [questionList, setQuestionList] = useState([
-    { idx: 0, questionTitle: '', options: ['새 항목1', '새 항목2', '새 항목3', '', ''] },
+    { idx: 0, questionTitle: '', kategorie: '객관식', options: ['', ''], descriptive: '' },
   ]);
 
   const navigate = useNavigate();
   const textarea = useRef();
 
-  const handleResizeHeight = () => {
-    textarea.current.style.height = 'auto'; //height 초기화
-    textarea.current.style.height = textarea.current.scrollHeight + 'px';
+  const onChangeSurveyTitle = (e) => {
+    setSurveyTitle(e.target.value);
   };
 
-  const onClickAddQuestion = (e) => {
-    setQuestionList([...questionList, { idx: questionList.length, questionTitle: '', options: [] }]);
+  const onChangeSurveyExplanation = (e) => {
+    textarea.current.style.height = 'auto'; //height 초기화
+    textarea.current.style.height = textarea.current.scrollHeight + 'px';
+    setSurveyExplanation(e.target.value);
+  };
+
+  const onClickAddQuestion = () => {
+    setQuestionList([...questionList, { idx: questionList.length, questionTitle: '', options: ['', ''], descriptive: '' }]);
   };
 
   const onSubmitSurvey = (e) => {
@@ -27,18 +34,29 @@ function MakingSurvey() {
     } else e.preventDefault();
   };
 
+  console.log(surveyTitle);
+  console.log(surveyExplanation);
+  // console.log(questionList);
+
   return (
     <main className='making-survey'>
       <div className='making-survey__title-box making-survey__border'>
         <div className='making-survey__boxColor'></div>
         <div className='making-survey__title-text'>
-          <input type='text' placeholder='설문지 제목을 입력해주세요.' className='making-survey__title' />
+          <input
+            type='text'
+            className='making-survey__title'
+            placeholder='설문지 제목을 입력해주세요.'
+            onChange={onChangeSurveyTitle}
+            value={surveyTitle}
+          />
           <textarea
+            className='making-survey__title-explanation'
             placeholder='설문에 대한 설명을 입력해주세요.'
             rows={1}
             ref={textarea}
-            onChange={handleResizeHeight}
-            className='making-survey__title-explanation'
+            onChange={onChangeSurveyExplanation}
+            value={surveyExplanation}
           />
         </div>
       </div>
