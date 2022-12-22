@@ -24,7 +24,10 @@ function MakingSurvey() {
   };
 
   const onClickAddQuestion = () => {
-    setQuestionList([...questionList, { idx: questionList.length, questionTitle: '', options: ['', ''], descriptive: '' }]);
+    setQuestionList([
+      ...questionList,
+      { idx: questionList.length, questionTitle: '', kategorie: '객관식', options: ['', ''], descriptive: '' },
+    ]);
   };
 
   const onSubmitSurvey = (e) => {
@@ -34,9 +37,15 @@ function MakingSurvey() {
     } else e.preventDefault();
   };
 
-  console.log(surveyTitle);
-  console.log(surveyExplanation);
+  const onClickImageUpload = (e) => {
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+  };
+
+  // console.log(surveyTitle);
+  // console.log(surveyExplanation);
   // console.log(questionList);
+  // 보낼 것 = surveyTitle, surveyExplanation, formData, questionList
 
   return (
     <main className='making-survey'>
@@ -58,6 +67,71 @@ function MakingSurvey() {
             onChange={onChangeSurveyExplanation}
             value={surveyExplanation}
           />
+        </div>
+        <div className='select-filter'>
+          <div className='select-filter__title'>만드실 설문의 정보를 선택해주세요</div>
+          <div className='select-filter__filter-contents'>
+            <ul className='filter-contents__thumbnail'>
+              <div className='filter-contents__header'>썸네일</div>
+              <li>
+                <input type='file' id='chooseThumbnail' name='chooseThumbnail' accept='image/*' onClick={onClickImageUpload} />
+              </li>
+            </ul>
+            <ul className='filter-contents__method'>
+              <div className='filter-contents__header'>설문 방식</div>
+              <li>
+                <input type='radio' name='contents__method' id='method__unknown' />
+                <label htmlFor='method__unknown'>무기명</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__method' id='method__known' />
+                <label htmlFor='method__known'>유기명</label>
+              </li>
+            </ul>
+            <ul className='filter-contents__gifticon'>
+              <div className='filter-contents__header'>기프티콘</div>
+
+              <li>
+                <input type='radio' name='contents__gifticon' id='gifticon__include' />
+                <label htmlFor='gifticon__include'>포함</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__gifticon' id='gifticon__exclude' />
+                <label htmlFor='gifticon__exclude'>미포함</label>
+              </li>
+            </ul>
+            <ul className='filter-contents__kategories'>
+              <div className='filter-contents__header'>설문 분야</div>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__social' />
+                <label htmlFor='kategories__social'>사회</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__cultureArt' />
+                <label htmlFor='kategories__cultureArt'>문화/예술</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__science' />
+                <label htmlFor='kategories__science'>과학</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__IT' />
+                <label htmlFor='kategories__IT'>IT</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__fashion' />
+                <label htmlFor='kategories__fashion'>패션</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__sports' />
+                <label htmlFor='kategories__sports'>스포츠</label>
+              </li>
+              <li>
+                <input type='radio' name='contents__kategories' id='kategories__religion' />
+                <label htmlFor='kategories__religion'>종교</label>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
