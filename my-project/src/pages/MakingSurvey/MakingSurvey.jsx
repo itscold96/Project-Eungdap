@@ -6,9 +6,16 @@ import './MakingSurvey.css';
 function MakingSurvey() {
   const [surveyTitle, setSurveyTitle] = useState('');
   const [surveyExplanation, setSurveyExplanation] = useState('');
+  const [radioChecksInfo, setRadioChecksInfo] = useState(new Map());
   const [questionList, setQuestionList] = useState([
     { idx: 0, questionTitle: '', kategorie: '객관식', options: ['', ''], descriptive: '' },
   ]);
+
+  const onClickSelectKategories = (e) => {
+    let name = e.target.name;
+    let checked = e.target.value;
+    setRadioChecksInfo(radioChecksInfo.set(name, checked));
+  };
 
   const navigate = useNavigate();
   const textarea = useRef();
@@ -44,8 +51,8 @@ function MakingSurvey() {
 
   // console.log(surveyTitle);
   // console.log(surveyExplanation);
-  // console.log(questionList);
-  // 보낼 것 = surveyTitle, surveyExplanation, formData, questionList
+  console.log(questionList);
+  // 서버로 보낼 것 = surveyTitle, surveyExplanation, formData, questionList, selectedKategories,radioChecksInfo
 
   return (
     <main className='making-survey'>
@@ -80,11 +87,17 @@ function MakingSurvey() {
             <ul className='filter-contents__method'>
               <div className='filter-contents__header'>설문 방식</div>
               <li>
-                <input type='radio' name='contents__method' id='method__unknown' />
+                <input
+                  type='radio'
+                  name='contents__method'
+                  id='method__unknown'
+                  value='무기명'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='method__unknown'>무기명</label>
               </li>
               <li>
-                <input type='radio' name='contents__method' id='method__known' />
+                <input type='radio' name='contents__method' id='method__known' value='유기명' onClick={onClickSelectKategories} />
                 <label htmlFor='method__known'>유기명</label>
               </li>
             </ul>
@@ -92,42 +105,96 @@ function MakingSurvey() {
               <div className='filter-contents__header'>기프티콘</div>
 
               <li>
-                <input type='radio' name='contents__gifticon' id='gifticon__include' />
+                <input
+                  type='radio'
+                  name='contents__gifticon'
+                  id='gifticon__include'
+                  value='포함'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='gifticon__include'>포함</label>
               </li>
               <li>
-                <input type='radio' name='contents__gifticon' id='gifticon__exclude' />
+                <input
+                  type='radio'
+                  name='contents__gifticon'
+                  id='gifticon__exclude'
+                  value='미포함'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='gifticon__exclude'>미포함</label>
               </li>
             </ul>
             <ul className='filter-contents__kategories'>
               <div className='filter-contents__header'>설문 분야</div>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__social' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__social'
+                  value='사회'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__social'>사회</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__cultureArt' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__cultureArt'
+                  value='문화/예술'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__cultureArt'>문화/예술</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__science' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__science'
+                  value='과학'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__science'>과학</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__IT' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__IT'
+                  value='IT'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__IT'>IT</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__fashion' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__fashion'
+                  value='패션'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__fashion'>패션</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__sports' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__sports'
+                  value='스포츠'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__sports'>스포츠</label>
               </li>
               <li>
-                <input type='radio' name='contents__kategories' id='kategories__religion' />
+                <input
+                  type='radio'
+                  name='contents__kategories'
+                  id='kategories__religion'
+                  value='종교'
+                  onClick={onClickSelectKategories}
+                />
                 <label htmlFor='kategories__religion'>종교</label>
               </li>
             </ul>

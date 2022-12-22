@@ -8,9 +8,11 @@ function Filter() {
     let toggle = e.target.innerText;
     if (toggledBtns.includes(toggle)) {
       toggledBtns.splice(toggledBtns.indexOf(toggle), 1);
-      return setToggledBtns([...toggledBtns]);
-    } else return setToggledBtns([...toggledBtns, toggle]);
+      setToggledBtns([...toggledBtns]);
+    } else setToggledBtns([...toggledBtns, toggle]);
   };
+
+  // console.log(toggledBtns);
 
   return (
     <div className='filter'>

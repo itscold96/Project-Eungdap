@@ -51,7 +51,7 @@ function Questions({ idx, questionList, setQuestionList }) {
     } else window.alert('항목은 최소 2개 이상이 필요합니다.');
   };
 
-  console.log(...questionList);
+  // console.log(...questionList);
 
   return (
     <>
