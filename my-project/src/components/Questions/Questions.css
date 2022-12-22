@@ -101,3 +101,8 @@
   outline: none;
   border-bottom: 1px solid #efefef;
 }
+
+.questions__qoptions-box input[type='radio'],
+.questions__qoptions-box input[type='checkbox'] {
+  margin-bottom: 1px;
+}
