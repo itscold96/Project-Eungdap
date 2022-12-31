@@ -7,8 +7,18 @@ function MakingSurvey() {
   const [surveyTitle, setSurveyTitle] = useState('');
   const [surveyExplanation, setSurveyExplanation] = useState('');
   const [radioChecksInfo, setRadioChecksInfo] = useState(new Map());
+  const [expiredDate, setExpiredDate] = useState('');
+  const [thumbnail, setThumbnail] = useState();
   const [questionList, setQuestionList] = useState([
-    { idx: 0, questionTitle: '', kategorie: '객관식', options: ['', ''], descriptive: '' },
+    {
+      idx: 0,
+      questionTitle: '',
+      qtype: 'SINGLEANSWER',
+      options: [
+        { idx: 0, option: '' },
+        { idx: 1, option: '' },
+      ],
+    },
   ]);
 
   const onClickSelectKategories = (e) => {
@@ -33,26 +43,66 @@ function MakingSurvey() {
   const onClickAddQuestion = () => {
     setQuestionList([
       ...questionList,
-      { idx: questionList.length, questionTitle: '', kategorie: '객관식', options: ['', ''], descriptive: '' },
+      {
+        idx: questionList.length,
+        questionTitle: '',
+        qtype: 'SINGLEANSWER',
+        options: [
+          { idx: 0, option: '' },
+          { idx: 1, option: '' },
+        ],
+      },
     ]);
   };
 
-  const onSubmitSurvey = (e) => {
-    if (window.confirm('이대로 설문을 완성하시겠습니까?')) {
-      window.alert('설문이 정상적으로 만들어졌습니다.');
-      navigate('/Main');
-    } else e.preventDefault();
+  const onChangeExpiredDate = (e) => {
+    setExpiredDate(e.target.value);
   };
 
   const onClickImageUpload = (e) => {
+    const uploadFile = e.target.files[0];
     const formData = new FormData();
-    formData.append('file', e.target.files[0]);
+    formData.append('files', uploadFile);
+
+    //async-await axios 통신으로 업로드된 파일 보내면 됨
+  };
+
+  const onSubmitSurvey = (e) => {
+    //테스트용이기 때문에 새로고침 방지
+    e.preventDefault();
+
+    const radioChecksInfoToServer = {};
+    for (let x of radioChecksInfo) {
+      radioChecksInfoToServer[x[0]] = x[1];
+    }
+
+    if (window.confirm('이대로 설문을 완성하시겠습니까?')) {
+      window.alert('설문이 정상적으로 만들어졌습니다.');
+      // navigate('/Main');
+      console.log(
+        '서버로 보낼 내용들: ',
+        '설문 제목: ',
+        surveyTitle,
+        '설문 설명: ',
+        surveyExplanation,
+        '마감 날짜: ',
+        expiredDate,
+        '썸네일 이미지: ',
+        thumbnail,
+        '설문 필터 정보: ',
+        radioChecksInfoToServer,
+        '질문 정보들: ',
+        questionList
+      );
+    } else e.preventDefault();
   };
 
   // console.log(surveyTitle);
   // console.log(surveyExplanation);
-  console.log(questionList);
-  // 서버로 보낼 것 = surveyTitle, surveyExplanation, formData, questionList, selectedKategories,radioChecksInfo
+  // console.log(questionList);
+  // console.log(radioChecksInfo);
+  // console.log(expiredDate);
+  // 서버로 보낼 것 = surveyTitle, surveyExplanation, formData, questionList, radioChecksInfo, expiredDate
 
   return (
     <main className='making-survey'>
@@ -78,6 +128,12 @@ function MakingSurvey() {
         <div className='select-filter'>
           <div className='select-filter__title'>만드실 설문의 정보를 선택해주세요</div>
           <div className='select-filter__filter-contents'>
+            <ul className='filter-contents__expired-date'>
+              <div className='filter-contents__header'>설문 마감</div>
+              <li>
+                <input type='date' onChange={onChangeExpiredDate} value={expiredDate} />
+              </li>
+            </ul>
             <ul className='filter-contents__thumbnail'>
               <div className='filter-contents__header'>썸네일</div>
               <li>
@@ -87,29 +143,22 @@ function MakingSurvey() {
             <ul className='filter-contents__method'>
               <div className='filter-contents__header'>설문 방식</div>
               <li>
-                <input
-                  type='radio'
-                  name='contents__method'
-                  id='method__unknown'
-                  value='무기명'
-                  onClick={onClickSelectKategories}
-                />
-                <label htmlFor='method__unknown'>무기명</label>
+                <input type='radio' name='contents__method' id='method__unknown' value='익명' onClick={onClickSelectKategories} />
+                <label htmlFor='method__unknown'>익명(결과 화면에서 닉네임으로만 응답자 식별)</label>
               </li>
               <li>
                 <input type='radio' name='contents__method' id='method__known' value='유기명' onClick={onClickSelectKategories} />
-                <label htmlFor='method__known'>유기명</label>
+                <label htmlFor='method__known'>유기명(연락처 or 이메일 등이 필요)</label>
               </li>
             </ul>
             <ul className='filter-contents__gifticon'>
               <div className='filter-contents__header'>기프티콘</div>
-
               <li>
                 <input
                   type='radio'
                   name='contents__gifticon'
                   id='gifticon__include'
-                  value='포함'
+                  value='INCLUDE'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='gifticon__include'>포함</label>
@@ -119,7 +168,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__gifticon'
                   id='gifticon__exclude'
-                  value='미포함'
+                  value='EXCLUDE'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='gifticon__exclude'>미포함</label>
@@ -132,7 +181,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__social'
-                  value='사회'
+                  value='SOCIAL'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__social'>사회</label>
@@ -142,7 +191,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__cultureArt'
-                  value='문화/예술'
+                  value='CULTUREART'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__cultureArt'>문화/예술</label>
@@ -152,7 +201,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__science'
-                  value='과학'
+                  value='SCIENCE'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__science'>과학</label>
@@ -172,7 +221,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__fashion'
-                  value='패션'
+                  value='FASHION'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__fashion'>패션</label>
@@ -182,7 +231,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__sports'
-                  value='스포츠'
+                  value='SPORTS'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__sports'>스포츠</label>
@@ -192,7 +241,7 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__kategories'
                   id='kategories__religion'
-                  value='종교'
+                  value='RELIGION'
                   onClick={onClickSelectKategories}
                 />
                 <label htmlFor='kategories__religion'>종교</label>

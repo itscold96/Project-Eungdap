@@ -2,8 +2,9 @@ import { useRef, useState } from 'react';
 import './Questions.css';
 
 function Questions({ idx, questionList, setQuestionList }) {
-  const kategoriesList = ['객관식', '복수응답', '주관식'];
-  const [selectedKategorie, setSelectedKategorie] = useState('객관식');
+  const kategoriesList = ['SINGLEANSWER', 'MULTIANSWER', 'DESCRIPTIVE'];
+  const ko_kategoriesList = ['객관식', '복수응답', '주관식'];
+  const [selectedKategorie, setSelectedKategorie] = useState('SINGLEANSWER');
 
   const descriptive = useRef();
 
@@ -13,7 +14,7 @@ function Questions({ idx, questionList, setQuestionList }) {
   };
 
   const handleSelect = (e) => {
-    questionList[idx].kategorie = e.target.value;
+    questionList[idx].qtype = e.target.value;
     setSelectedKategorie(e.target.value);
   };
 
@@ -34,12 +35,14 @@ function Questions({ idx, questionList, setQuestionList }) {
 
   const onChangeOptions = (e) => {
     const optNum = e.target.id.split('o')[1];
-    questionList[idx].options[optNum] = e.target.value;
+    console.log(questionList[idx].options[optNum].option);
+    questionList[idx].options[optNum].option = e.target.value;
     setQuestionList([...questionList]);
   };
 
   const onClickAddOption = () => {
-    questionList[idx].options.push('');
+    questionList[idx].options.push({ idx: questionList[idx].options.length, option: '' });
+    console.log('여기임');
     setQuestionList([...questionList]);
   };
 
@@ -47,11 +50,12 @@ function Questions({ idx, questionList, setQuestionList }) {
     if (questionList[idx].options.length > 2) {
       const optNum = e.target.id.split('o')[1];
       questionList[idx].options.splice(optNum, 1);
+      questionList[idx].options.map((item, index) => (item.idx = index));
       setQuestionList([...questionList]);
     } else window.alert('항목은 최소 2개 이상이 필요합니다.');
   };
 
-  // console.log(...questionList);
+  console.log(...questionList);
 
   return (
     <>
@@ -71,19 +75,19 @@ function Questions({ idx, questionList, setQuestionList }) {
             <select className='qtitle-box__kategories' onChange={handleSelect} value={selectedKategorie}>
               {kategoriesList.map((item, idx) => (
                 <option value={item} key={idx}>
-                  {item}
+                  {ko_kategoriesList[idx]}
                 </option>
               ))}
             </select>
           </div>
           <div className='questions__qoptions-box'>
-            {selectedKategorie !== '주관식' ? (
+            {selectedKategorie !== 'DESCRIPTIVE' ? (
               <ul className='options-box'>
                 {questionList[idx].options.map((item, index) => (
                   <li key={index}>
-                    {selectedKategorie === '객관식' ? (
+                    {selectedKategorie === 'SINGLEANSWER' ? (
                       <input type='radio' name={'q' + idx} />
-                    ) : selectedKategorie === '복수응답' ? (
+                    ) : selectedKategorie === 'MULTIANSWER' ? (
                       <input type='checkbox' name={'q' + idx} />
                     ) : (
                       <></>
@@ -95,7 +99,7 @@ function Questions({ idx, questionList, setQuestionList }) {
                       className='options-box__option-text'
                       placeholder='항목 내용을 입력해주세요.'
                       onChange={onChangeOptions}
-                      value={item}
+                      value={item.option}
                     />
                     <button id={'xq' + idx + 'o' + index} onClick={onClickDeleteOption}>
                       x

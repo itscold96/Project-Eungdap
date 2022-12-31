@@ -10,7 +10,7 @@ function Main() {
         </div>
         <div className='main-upper__bg'>sadsadsadsadsa</div>
         <div className='main-upper__text'>
-          <p>당신이 원하는 설문을 찾아보세요.</p>
+          <p>원하는 설문을 찾아보세요.</p>
         </div>
       </div>
       <main className='main-page'>

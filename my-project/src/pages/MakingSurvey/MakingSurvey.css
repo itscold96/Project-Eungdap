@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 90px;
 }
 
 .making-survey__border {
@@ -15,6 +15,7 @@
   box-sizing: border-box;
   background-color: white;
   border-radius: 15px;
+  padding-bottom: 15px;
 }
 
 .making-survey__boxColor {
@@ -40,7 +41,7 @@
 .making-survey__title-explanation {
   border: none;
   width: 100%;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #c4c2c2;
 }
 
 .making-survey__title-explanation,
@@ -69,25 +70,19 @@
   font-weight: 500;
 }
 
-/* .thumbnail-upload-button {
-  background-color: #1f4072;
-  color: white;
-  border-radius: 20px;
-  font-size: 1rem;
-  padding: 2px 7px;
-} */
-
 .filter-contents__thumbnail,
 .filter-contents__method,
 .filter-contents__gifticon,
-.filter-contents__kategories {
+.filter-contents__kategories,
+.filter-contents__expired-date {
   display: flex;
 }
 
 .filter-contents__thumbnail li,
 .filter-contents__method li,
 .filter-contents__gifticon li,
-.filter-contents__kategories li {
+.filter-contents__kategories li,
+.filter-contents__expired-date li {
   display: flex;
   justify-content: center;
   align-items: center;
