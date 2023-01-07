@@ -2,9 +2,9 @@ import { useRef, useState } from 'react';
 import './Questions.css';
 
 function Questions({ idx, questionList, setQuestionList }) {
-  const kategoriesList = ['SINGLEANSWER', 'MULTIANSWER', 'DESCRIPTIVE'];
-  const ko_kategoriesList = ['객관식', '복수응답', '주관식'];
-  const [selectedKategorie, setSelectedKategorie] = useState('SINGLEANSWER');
+  const categoriesList = ['SINGLEANSWER', 'MULTIANSWER', 'DESCRIPTIVE'];
+  const ko_categoriesList = ['객관식', '복수응답', '주관식'];
+  const [selectedCategorie, setSelectedCategorie] = useState('SINGLEANSWER');
 
   const descriptive = useRef();
 
@@ -15,7 +15,7 @@ function Questions({ idx, questionList, setQuestionList }) {
 
   const handleSelect = (e) => {
     questionList[idx].qtype = e.target.value;
-    setSelectedKategorie(e.target.value);
+    setSelectedCategorie(e.target.value);
   };
 
   const onChangeDescriptive = (e) => {
@@ -72,22 +72,22 @@ function Questions({ idx, questionList, setQuestionList }) {
               value={questionList[idx].questionTitle}
             />
             {/* 질문 유형 선택 */}
-            <select className='qtitle-box__kategories' onChange={handleSelect} value={selectedKategorie}>
-              {kategoriesList.map((item, idx) => (
+            <select className='qtitle-box__categories' onChange={handleSelect} value={selectedCategorie}>
+              {categoriesList.map((item, idx) => (
                 <option value={item} key={idx}>
-                  {ko_kategoriesList[idx]}
+                  {ko_categoriesList[idx]}
                 </option>
               ))}
             </select>
           </div>
           <div className='questions__qoptions-box'>
-            {selectedKategorie !== 'DESCRIPTIVE' ? (
+            {selectedCategorie !== 'DESCRIPTIVE' ? (
               <ul className='options-box'>
                 {questionList[idx].options.map((item, index) => (
                   <li key={index}>
-                    {selectedKategorie === 'SINGLEANSWER' ? (
+                    {selectedCategorie === 'SINGLEANSWER' ? (
                       <input type='radio' name={'q' + idx} />
-                    ) : selectedKategorie === 'MULTIANSWER' ? (
+                    ) : selectedCategorie === 'MULTIANSWER' ? (
                       <input type='checkbox' name={'q' + idx} />
                     ) : (
                       <></>

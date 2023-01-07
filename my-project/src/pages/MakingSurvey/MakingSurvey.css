@@ -73,7 +73,7 @@
 .filter-contents__thumbnail,
 .filter-contents__method,
 .filter-contents__gifticon,
-.filter-contents__kategories,
+.filter-contents__categories,
 .filter-contents__expired-date {
   display: flex;
 }
@@ -81,7 +81,7 @@
 .filter-contents__thumbnail li,
 .filter-contents__method li,
 .filter-contents__gifticon li,
-.filter-contents__kategories li,
+.filter-contents__categories li,
 .filter-contents__expired-date li {
   display: flex;
   justify-content: center;

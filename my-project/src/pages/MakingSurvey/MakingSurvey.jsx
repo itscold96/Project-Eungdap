@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Questions from 'components/Questions/Questions';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ function MakingSurvey() {
     },
   ]);
 
-  const onClickSelectKategories = (e) => {
+  const onClickSelectCategories = (e) => {
     let name = e.target.name;
     let checked = e.target.value;
     setRadioChecksInfo(radioChecksInfo.set(name, checked));
@@ -67,7 +68,7 @@ function MakingSurvey() {
     //async-await axios 통신으로 업로드된 파일 보내면 됨
   };
 
-  const onSubmitSurvey = (e) => {
+  const onSubmitSurvey = async (e) => {
     //테스트용이기 때문에 새로고침 방지
     e.preventDefault();
 
@@ -94,6 +95,20 @@ function MakingSurvey() {
         '질문 정보들: ',
         questionList
       );
+
+      try {
+        const response = await axios.post('URL', {
+          surveyTitle,
+          surveyExplanation,
+          expiredDate,
+          thumbnail,
+          radioChecksInfoToServer,
+          questions: questionList,
+        });
+        console.log(response);
+      } catch (e) {
+        console.log('something went wrong!', e);
+      }
     } else e.preventDefault();
   };
 
@@ -143,11 +158,17 @@ function MakingSurvey() {
             <ul className='filter-contents__method'>
               <div className='filter-contents__header'>설문 방식</div>
               <li>
-                <input type='radio' name='contents__method' id='method__unknown' value='익명' onClick={onClickSelectKategories} />
+                <input
+                  type='radio'
+                  name='contents__method'
+                  id='method__unknown'
+                  value='UNNKOWN'
+                  onClick={onClickSelectCategories}
+                />
                 <label htmlFor='method__unknown'>익명(결과 화면에서 닉네임으로만 응답자 식별)</label>
               </li>
               <li>
-                <input type='radio' name='contents__method' id='method__known' value='유기명' onClick={onClickSelectKategories} />
+                <input type='radio' name='contents__method' id='method__known' value='NKOWN' onClick={onClickSelectCategories} />
                 <label htmlFor='method__known'>유기명(연락처 or 이메일 등이 필요)</label>
               </li>
             </ul>
@@ -159,7 +180,7 @@ function MakingSurvey() {
                   name='contents__gifticon'
                   id='gifticon__include'
                   value='INCLUDE'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
                 <label htmlFor='gifticon__include'>포함</label>
               </li>
@@ -169,82 +190,82 @@ function MakingSurvey() {
                   name='contents__gifticon'
                   id='gifticon__exclude'
                   value='EXCLUDE'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
                 <label htmlFor='gifticon__exclude'>미포함</label>
               </li>
             </ul>
-            <ul className='filter-contents__kategories'>
+            <ul className='filter-contents__categories'>
               <div className='filter-contents__header'>설문 분야</div>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__social'
+                  name='contents__categories'
+                  id='categories__social'
                   value='SOCIAL'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__social'>사회</label>
+                <label htmlFor='categories__social'>사회</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__cultureArt'
+                  name='contents__categories'
+                  id='categories__cultureArt'
                   value='CULTUREART'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__cultureArt'>문화/예술</label>
+                <label htmlFor='categories__cultureArt'>문화/예술</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__science'
+                  name='contents__categories'
+                  id='categories__science'
                   value='SCIENCE'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__science'>과학</label>
+                <label htmlFor='categories__science'>과학</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__IT'
+                  name='contents__categories'
+                  id='categories__IT'
                   value='IT'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__IT'>IT</label>
+                <label htmlFor='categories__IT'>IT</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__fashion'
+                  name='contents__categories'
+                  id='categories__fashion'
                   value='FASHION'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__fashion'>패션</label>
+                <label htmlFor='categories__fashion'>패션</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__sports'
+                  name='contents__categories'
+                  id='categories__sports'
                   value='SPORTS'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__sports'>스포츠</label>
+                <label htmlFor='categories__sports'>스포츠</label>
               </li>
               <li>
                 <input
                   type='radio'
-                  name='contents__kategories'
-                  id='kategories__religion'
+                  name='contents__categories'
+                  id='categories__religion'
                   value='RELIGION'
-                  onClick={onClickSelectKategories}
+                  onClick={onClickSelectCategories}
                 />
-                <label htmlFor='kategories__religion'>종교</label>
+                <label htmlFor='categories__religion'>종교</label>
               </li>
             </ul>
           </div>
