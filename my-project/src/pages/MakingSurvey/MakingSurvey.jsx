@@ -162,13 +162,13 @@ function MakingSurvey() {
                   type='radio'
                   name='contents__method'
                   id='method__unknown'
-                  value='UNNKOWN'
+                  value='UNKNOWN'
                   onClick={onClickSelectCategories}
                 />
                 <label htmlFor='method__unknown'>익명(결과 화면에서 닉네임으로만 응답자 식별)</label>
               </li>
               <li>
-                <input type='radio' name='contents__method' id='method__known' value='NKOWN' onClick={onClickSelectCategories} />
+                <input type='radio' name='contents__method' id='method__known' value='KNOWN' onClick={onClickSelectCategories} />
                 <label htmlFor='method__known'>유기명(연락처 or 이메일 등이 필요)</label>
               </li>
             </ul>
