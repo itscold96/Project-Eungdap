@@ -9,7 +9,7 @@ function MakingSurvey() {
   const [surveyExplanation, setSurveyExplanation] = useState('');
   const [radioChecksInfo, setRadioChecksInfo] = useState(new Map());
   const [expiredDate, setExpiredDate] = useState('');
-  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail, setThumbnail] = useState({});
   const [questionList, setQuestionList] = useState([
     {
       idx: 0,
@@ -60,10 +60,11 @@ function MakingSurvey() {
     setExpiredDate(e.target.value);
   };
 
-  const onClickImageUpload = (e) => {
+  const onClickImageUpload = async (e) => {
     const uploadFile = e.target.files[0];
     const formData = new FormData();
     formData.append('files', uploadFile);
+    setThumbnail(formData);
 
     //async-await axios 통신으로 업로드된 파일 보내면 됨
   };
@@ -96,6 +97,13 @@ function MakingSurvey() {
         questionList
       );
 
+      /* thumnail 값 확인하기 */
+      for (let key of thumbnail.keys()) {
+        console.log('키:', key);
+      }
+      for (let value of thumbnail.values()) {
+        console.log('밸류:', value);
+      }
       try {
         const response = await axios.post('URL', {
           surveyTitle,
@@ -105,7 +113,7 @@ function MakingSurvey() {
           radioChecksInfoToServer,
           questions: questionList,
         });
-        console.log(response);
+        console.log('바로: ', response);
       } catch (e) {
         console.log('something went wrong!', e);
       }
@@ -152,7 +160,7 @@ function MakingSurvey() {
             <ul className='filter-contents__thumbnail'>
               <div className='filter-contents__header'>썸네일</div>
               <li>
-                <input type='file' id='chooseThumbnail' name='chooseThumbnail' accept='image/*' onClick={onClickImageUpload} />
+                <input type='file' id='chooseThumbnail' name='chooseThumbnail' accept='image/*' onChange={onClickImageUpload} />
               </li>
             </ul>
             <ul className='filter-contents__method'>
