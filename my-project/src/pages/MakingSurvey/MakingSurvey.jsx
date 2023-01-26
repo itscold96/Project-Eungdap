@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Questions from 'components/Questions/Questions';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import './MakingSurvey.css';
 
 function MakingSurvey() {
@@ -9,7 +9,9 @@ function MakingSurvey() {
   const [surveyExplanation, setSurveyExplanation] = useState('');
   const [radioChecksInfo, setRadioChecksInfo] = useState(new Map());
   const [expiredDate, setExpiredDate] = useState('');
-  const [postData, setPostData] = useState({});
+  const [thumbnail, setThumbnail] = useState({});
+  // const navigate = useNavigate();
+  const textarea = useRef();
   const [questionList, setQuestionList] = useState([
     {
       idx: 0,
@@ -27,9 +29,6 @@ function MakingSurvey() {
     let checked = e.target.value;
     setRadioChecksInfo(radioChecksInfo.set(name, checked));
   };
-
-  const navigate = useNavigate();
-  const textarea = useRef();
 
   const onChangeSurveyTitle = (e) => {
     setSurveyTitle(e.target.value);
@@ -64,7 +63,7 @@ function MakingSurvey() {
     const uploadFile = e.target.files[0];
     const formData = new FormData();
     formData.append('files', uploadFile);
-    setPostData(formData);
+    setThumbnail(formData);
   };
 
   const onSubmitSurvey = async (e) => {
@@ -88,38 +87,40 @@ function MakingSurvey() {
         '마감 날짜: ',
         expiredDate,
         '썸네일 이미지: ',
-        postData,
+        thumbnail,
         '설문 필터 정보: ',
         radioChecksInfoToServer,
         '질문 정보들: ',
         questionList
       );
 
-      // /* thumnail 확인하기 */
-      // for (let key of postData.keys()) {
-      //   console.log('키:', key);
-      // }
-      // for (let value of postData.values()) {
-      //   console.log('밸류:', value);
-      // }
-
+      const token = window.localStorage.getItem('token');
+      console.log('보낼토큰 --->>' + token);
+      thumbnail.append('userid', 1);
+      thumbnail.append('surveytitle', surveyTitle);
+      thumbnail.append('surveyexplaination', surveyExplanation);
+      thumbnail.append('expireddate', expiredDate);
+      thumbnail.append('pollconditions', new Blob([JSON.stringify(radioChecksInfoToServer)], { type: 'application/json' }));
+      thumbnail.append('questions', new Blob([JSON.stringify(questionList)], { type: 'application/json' }));
+      for (let key of thumbnail.keys()) {
+        console.log('키:', key);
+      }
+      for (let value of thumbnail.values()) {
+        console.log('밸류:', value);
+        console.log('밸류타입 :', typeof value);
+      }
       try {
-        postData.append('surveyInfoJSON', {
-          surveyTitle,
-          surveyExplanation,
-          expiredDate,
-          radioChecksInfoToServer,
-          questionList,
+        const ans = await axios.post('/user/poll', thumbnail, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: token,
+          },
         });
-
-        const response = await axios.post('URL', {
-          postData,
-        });
-        console.log('바로: ', response);
+        console.log(ans);
       } catch (e) {
         console.log('something went wrong!', e);
       }
-    } else e.preventDefault();
+    }
   };
 
   return (
@@ -285,7 +286,7 @@ function MakingSurvey() {
         <button className='btn-basic btn-add' onClick={onClickAddQuestion}>
           질문 추가
         </button>
-        <form method='post' onSubmit={onSubmitSurvey}>
+        <form onSubmit={onSubmitSurvey} method='post' encType='multipart/form-data'>
           <button className='btn-basic'>설문 완성</button>
         </form>
       </div>

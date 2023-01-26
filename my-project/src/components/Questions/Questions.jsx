@@ -8,6 +8,13 @@ function Questions({ idx, questionList, setQuestionList }) {
 
   const descriptive = useRef();
 
+  const onChangeDescriptive = (e) => {
+    descriptive.current.style.height = 'auto'; //height 초기화
+    descriptive.current.style.height = descriptive.current.scrollHeight + 'px';
+    questionList[idx].descriptive = e.target.value;
+    setQuestionList([...questionList]);
+  };
+
   const onChangeQustionTitle = (e) => {
     questionList[idx].questionTitle = e.target.value;
     setQuestionList([...questionList]);
@@ -16,13 +23,6 @@ function Questions({ idx, questionList, setQuestionList }) {
   const handleSelect = (e) => {
     questionList[idx].qtype = e.target.value;
     setSelectedCategorie(e.target.value);
-  };
-
-  const onChangeDescriptive = (e) => {
-    descriptive.current.style.height = 'auto'; //height 초기화
-    descriptive.current.style.height = descriptive.current.scrollHeight + 'px';
-    questionList[idx].descriptive = e.target.value;
-    setQuestionList([...questionList]);
   };
 
   const onClickDeleteQuestion = () => {
@@ -42,7 +42,6 @@ function Questions({ idx, questionList, setQuestionList }) {
 
   const onClickAddOption = () => {
     questionList[idx].options.push({ idx: questionList[idx].options.length, option: '' });
-    console.log('여기임');
     setQuestionList([...questionList]);
   };
 

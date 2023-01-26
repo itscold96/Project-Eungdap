@@ -45,6 +45,7 @@
 }
 
 .survey {
+  cursor: pointer;
   background-color: white;
   height: 260px;
   width: 290px;
