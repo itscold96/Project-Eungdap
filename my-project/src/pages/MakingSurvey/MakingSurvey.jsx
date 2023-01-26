@@ -9,7 +9,7 @@ function MakingSurvey() {
   const [surveyExplanation, setSurveyExplanation] = useState('');
   const [radioChecksInfo, setRadioChecksInfo] = useState(new Map());
   const [expiredDate, setExpiredDate] = useState('');
-  const [thumbnail, setThumbnail] = useState({});
+  const [postData, setPostData] = useState({});
   const [questionList, setQuestionList] = useState([
     {
       idx: 0,
@@ -64,9 +64,7 @@ function MakingSurvey() {
     const uploadFile = e.target.files[0];
     const formData = new FormData();
     formData.append('files', uploadFile);
-    setThumbnail(formData);
-
-    //async-await axios 통신으로 업로드된 파일 보내면 됨
+    setPostData(formData);
   };
 
   const onSubmitSurvey = async (e) => {
@@ -90,28 +88,32 @@ function MakingSurvey() {
         '마감 날짜: ',
         expiredDate,
         '썸네일 이미지: ',
-        thumbnail,
+        postData,
         '설문 필터 정보: ',
         radioChecksInfoToServer,
         '질문 정보들: ',
         questionList
       );
 
-      /* thumnail 값 확인하기 */
-      for (let key of thumbnail.keys()) {
-        console.log('키:', key);
-      }
-      for (let value of thumbnail.values()) {
-        console.log('밸류:', value);
-      }
+      // /* thumnail 확인하기 */
+      // for (let key of postData.keys()) {
+      //   console.log('키:', key);
+      // }
+      // for (let value of postData.values()) {
+      //   console.log('밸류:', value);
+      // }
+
       try {
-        const response = await axios.post('URL', {
+        postData.append('surveyInfoJSON', {
           surveyTitle,
           surveyExplanation,
           expiredDate,
-          thumbnail,
           radioChecksInfoToServer,
-          questions: questionList,
+          questionList,
+        });
+
+        const response = await axios.post('URL', {
+          postData,
         });
         console.log('바로: ', response);
       } catch (e) {
@@ -119,13 +121,6 @@ function MakingSurvey() {
       }
     } else e.preventDefault();
   };
-
-  // console.log(surveyTitle);
-  // console.log(surveyExplanation);
-  // console.log(questionList);
-  // console.log(radioChecksInfo);
-  // console.log(expiredDate);
-  // 서버로 보낼 것 = surveyTitle, surveyExplanation, formData, questionList, radioChecksInfo, expiredDate
 
   return (
     <main className='making-survey'>

@@ -18,18 +18,26 @@ function Main() {
         <div className='main-page__surveys'>
           <ul className='survey'>
             <li>
-              <img src='/images/samples/sample1.png' alt='설문조사 썸네일' height={'170px'} width={'290px'} />
+              <img
+                src='https://react-spring-pollproject.s3.ap-northeast-2.amazonaws.com/test/9a50031c-b3a5-4d63-bc0a-24a51974badefiles.jpg'
+                alt='설문조사 썸네일'
+                height={'170px'}
+                width={'290px'}
+              />
             </li>
-            <li className='survey__title'>2023 대학생 만족도 설문조사</li>
+            <li className='survey__title'>사진 URL 테스트</li>
           </ul>
           {/* 샘플용 시작*/}
           <ul className='survey'>
             <li>
-              <img src='/images/samples/sample1.png' alt='설문조사 썸네일' height={'170px'} width={'290px'} />
+              <img
+                src='https://lh3.googleusercontent.com/a/AEdFTp5eRG3ptAUwTVFYTRFl8DEdiTXk5WxuxroTiXk5=s96-c'
+                alt='설문조사 썸네일'
+                height={'170px'}
+                width={'290px'}
+              />
             </li>
-            <li className='survey__title'>
-              2023 대학생 만족도 설문조사023 대학생 만족도 설문조사023 대학생 만족도 설문조사2023 대학생 만족도
-            </li>
+            <li className='survey__title'>사진 구글 URL</li>
           </ul>
           <ul className='survey'>
             <li>
